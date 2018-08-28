@@ -7,7 +7,7 @@ const routes: Routes = [
         path: 'frame',
         component: FrameComponent,
         children: [
-            { path: '', loadChildren: '../change-password/change-password.module#ChangePasswordModule' },
+            { path: '', loadChildren: '' },
         ]
     }
 ];

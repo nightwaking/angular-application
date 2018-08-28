@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +8,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  formErrors = {
+    'userName': '',
+    'password': ''
+  };
 
-  ngOnInit() {
+  validationMessage = {
+    'userName': {'required': '用户名不能为空'},
+    'password': {'required': '密码不能为空'}
+  };
+  
+  validateForm: FormGroup;
+  userName: string;
+  password: string;
+  remember: boolean;
+
+  constructor(private fb: FormBuilder){}
+  
+  ngOnInit(): void{
+    this.validateForm = this.fb.group({
+      userName: [this.userName, [Validators.required]],
+      password: [this.password, [Validators.required]],
+      remember:  [this.remember],
+    });
+
+    this.validateForm.valueChanges.subscribe((value) => this.checkForm());
   }
 
+  private checkForm(): void {
+  }
 }
